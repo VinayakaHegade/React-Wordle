@@ -1,15 +1,32 @@
+import { useEffect, useState } from "react";
 
 function App() {
+  const [solution, setSolution] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/solutions")
+      .then((res) => res.json())
+      .then((json) => {
+        const randomSolution = json[Math.floor(Math.random() * json.length)];
+        setSolution(randomSolution.word.toUpperCase());
+      });
+  }, [setSolution]);
+
   return (
     <div className="App">
       <h1>Wordle - Guess the word game</h1>
+      {solution && <div>Solution is: {solution}</div>}
     </div>
   );
 }
 
-export default App
+export default App;
 
 /* 
+
+how to convert something like ["apple", "fruit", "brave"] to [ {"word": "apple" , "id": 1}, { "word": "fruit", "id":2}]
+
+myArray.map((item,index) => ({word: item, id: index+1}))
 
 data we need to track:
   -- solution
