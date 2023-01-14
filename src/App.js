@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Wordle from "./components/Wordle";
 
 function App() {
   const [solution, setSolution] = useState(null);
@@ -8,26 +9,22 @@ function App() {
       .then((res) => res.json())
       .then((json) => {
         const randomSolution = json[Math.floor(Math.random() * json.length)];
-        setSolution(randomSolution.word.toUpperCase());
+        setSolution(randomSolution.word);
       });
   }, [setSolution]);
 
   return (
     <div className="App">
       <h1>Wordle - Guess the word game</h1>
-      {solution && <div>Solution is: {solution}</div>}
+      {solution && <Wordle solution={solution}/>}
     </div>
   );
 }
 
 export default App;
 
+
 /* 
-
-how to convert something like ["apple", "fruit", "brave"] to [ {"word": "apple" , "id": 1}, { "word": "fruit", "id":2}]
-
-myArray.map((item,index) => ({word: item, id: index+1}))
-
 data we need to track:
   -- solution
     -- 5 letter string, e.g. 'drain'
@@ -63,5 +60,9 @@ game process:
       -- modal to say 'well done'
     -- when the user runs out of guesses
       -- modal to say 'unlucky'
+
+      how to convert something like ["apple", "fruit", "brave"] to [ {"word": "apple" , "id": 1}, { "word": "fruit", "id":2}]
+
+myArray.map((item,index) => ({word: item, id: index+1}))
 
 */
