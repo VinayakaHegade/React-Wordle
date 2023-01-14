@@ -66,7 +66,7 @@ const useWordle = (solution) => {
         return;
       }
       //do not allow duplicate words
-      if (history.includes(currentGuess)) {
+      if (history.includes(currentGuess.toLowerCase())) {
         console.log("You already tried this word");
         return;
       }
