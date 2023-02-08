@@ -16,7 +16,11 @@ export default function Keypad({usedKeys}) {
       {letters &&
         letters.map((letterObj) => {
           const color = usedKeys[letterObj.key]
-          return <div className={color} key={letterObj.key}>{letterObj.key}</div>;
+          return (
+            <div className={color} key={letterObj.key}>
+              {letterObj.key.toUpperCase()}
+            </div>
+          );
         })}
     </div>
   );
