@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Wordle - Guess the word game</h1>
+      <h1>Wordle - Guess the word </h1>
       {solution && <Wordle solution={solution}/>}
     </div>
   );
@@ -65,4 +65,10 @@ game process:
 
 myArray.map((item,index) => ({word: item, id: index+1}))
 
+
+Wordle - Guess a Five Letter Word Game
+
+Guess the hidden word in 6 tries. Unlimited puzzles, no limitation for the day.
+
+https://metatags.io/
 */

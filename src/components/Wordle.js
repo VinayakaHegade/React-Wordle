@@ -1,22 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useWordle from "../hooks/useWordle";
+import EndModal from "./EndModal";
 import Grid from "./Grid";
 import Keypad from "./Keypad";
 
 export default function Wordle({ solution }) {
   const { currentGuess, handleKeyup, guesses, turn, isCorrect, usedKeys } =
     useWordle(solution);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     window.addEventListener("keyup", handleKeyup);
 
     if (isCorrect) {
-      console.log("Hurray!!!.. You Won!");
+      setTimeout(() => setShowModal(true), 2000);
       window.removeEventListener("keyup", handleKeyup);
     }
 
     if (turn > 5) {
-      console.log("Unlucky :(  you ran out of guesses");
+      setTimeout(() => setShowModal(true), 2000);
       window.removeEventListener("keyup", handleKeyup);
     }
 
@@ -25,10 +27,13 @@ export default function Wordle({ solution }) {
 
   return (
     <div>
-      <div>Solution - {solution.toUpperCase()}</div>
-      <div>Current guess - {currentGuess.toUpperCase()}</div>
+      {/* <div>Solution - {solution.toUpperCase()}</div>
+      <div>Current guess - {currentGuess.toUpperCase()}</div> */}
       <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
       <Keypad usedKeys={usedKeys} />
+      {showModal && (
+        <EndModal isCorrect={isCorrect} turn={turn} solution={solution} />
+      )}
     </div>
   );
 }
